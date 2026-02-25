@@ -8,7 +8,6 @@ authors = [
     { name = "Flet developer", email = "you@example.com" }
 ]
 dependencies = [
-    "dataclasses>=0.8",
     "docx>=0.2.4",
     "flet>=0.80.5",
     "pysos>=1.3.0",
