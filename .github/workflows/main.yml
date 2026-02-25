@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false 
 
 env: 
-  UV_PYTHON: 3.12 
+  UV_PYTHON: 3.10 
 
   # https://docs.flet.dev/reference/environment-variables
   FLET_CLI_NO_RICH_OUTPUT: 1 
