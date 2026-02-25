@@ -24,13 +24,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4 
 
-      - name: Setup uv
-        uses: astral-sh/setup-uv@v6 
-
       - name: Build app
         shell: bash
         run: | 
-          uv run flet build web --yes --verbose --base-url ${GITHUB_REPOSITORY#*/} --route-url-strategy hash
+          flet build web --yes --verbose --base-url ${GITHUB_REPOSITORY#*/} --route-url-strategy hash
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v4.0.0 
