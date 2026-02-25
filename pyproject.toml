@@ -16,8 +16,6 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "flet-cli>=0.80.5",
-    "flet-desktop>=0.80.5",
     "flet-web>=0.80.5",
 ]
 
