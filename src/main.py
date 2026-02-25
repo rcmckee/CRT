@@ -474,7 +474,7 @@ def main(page: ft.Page):
 			]
 		)
 	)
-ft.run(main, assets_dir="assets")
+# ft.run(main, assets_dir="assets")
 
 if __name__ == "__main__":
     ft.run(main)
