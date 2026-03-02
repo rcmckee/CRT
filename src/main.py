@@ -2,16 +2,13 @@ import flet as ft
 ########
 import docx
 import pysos
-from sentence_transformers import SentenceTransformer
-from sentence_transformers.util import semantic_search
-# from google.colab import files
-# from IPython.display import HTML
+
 import hashlib
 from difflib import SequenceMatcher
 # import re
 import os
 import asyncio
-import webbrowser
+
 
 def main(page: ft.Page):
 
@@ -19,16 +16,16 @@ def main(page: ft.Page):
 	secondary_cutoff_value = 0.60 # secondary similarity threshold for related clauses.
 
 	# loading pre-made contract codex database
-	db_hash_values = pysos.Dict('storage/db/pysos_hash_values')
-	db_meta_data = pysos.Dict('storage/db/pysos_meta_data_db')
+	# db_hash_values = pysos.Dict('storage/db/pysos_hash_values')
+	# db_meta_data = pysos.Dict('storage/db/pysos_meta_data_db')
 
 	# creating sentence embeddings from the contract codex clauses
 	# sentence embeddings allow similarity searching
-	clause_phrases = [v['clause'] for k,v in db_hash_values.items()]
+	# clause_phrases = [v['clause'] for k,v in db_hash_values.items()]
 
-	model = SentenceTransformer('all-MiniLM-L6-v2')
+	# model = SentenceTransformer('all-MiniLM-L6-v2')
 
-	sentence_embeddings = model.encode(clause_phrases)
+	# sentence_embeddings = model.encode(clause_phrases)
 
 	def get_text_from_file(filename):
 		doc = docx.Document(filename)
