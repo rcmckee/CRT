@@ -1,5 +1,5 @@
 [project]
-name = "CRT"
+name = "crt"
 version = "0.1.0"
 description = ""
 readme = "README.md"
@@ -8,7 +8,9 @@ authors = [
     { name = "Robert McKee", email = "robertmckee@pm.me" }
 ]
 dependencies = [
-    "flet>=0.81.0"
+    "flet>=0.81.0",
+    "numpy>=2.0.2",
+    "python-docx>=1.2.0",
 ]
 
 [dependency-groups]
@@ -20,9 +22,9 @@ dev = [
 
 [tool.flet]
 org = "com.robertcmckee"
-product = "CRT"
-company = "Flet"
-copyright = "Copyright (C) 2023-2026 by Robert C McKee"
+product = "crt"
+company = "crt"
+copyright = "Copyright (C) 2023-2026 by crt"
 
 [tool.flet.app]
 path = "src"
