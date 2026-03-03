@@ -11,6 +11,8 @@ import asyncio
 
 
 def main(page: ft.Page):
+	page.title = "Flet counter example"
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
 	cutoff_value = 0.7 # primary similarity threshold, you can lower this to get more results. a number between 1.0 and 0.0
 	secondary_cutoff_value = 0.60 # secondary similarity threshold for related clauses.
