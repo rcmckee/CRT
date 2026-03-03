@@ -1,6 +1,6 @@
 import flet as ft
 ########
-import docx
+# import docx
 # import pysos
 
 # import hashlib
@@ -347,132 +347,132 @@ def main(page: ft.Page):
 	#https://docs.flet.dev/services/filepicker/#pick-and-upload-files
 
 	# Progress widgets (hidden until processing starts)
-	progress_bar = ft.ProgressBar(width=400, visible=False)
-	progress_percent = ft.Text("", visible=False)
+	# progress_bar = ft.ProgressBar(width=400, visible=False)
+	# progress_percent = ft.Text("", visible=False)
 
 
-	async def handle_pick_files(e: ft.Event[ft.Button]):
-		files = await ft.FilePicker().pick_files(allow_multiple=False)
-		if not files:
-			return
+	# async def handle_pick_files(e: ft.Event[ft.Button]):
+	# 	files = await ft.FilePicker().pick_files(allow_multiple=False)
+	# 	if not files:
+	# 		return
 
-		doc_text = get_text_from_file(files[0].path)
+	# 	doc_text = get_text_from_file(files[0].path)
 
-		# count non-empty paragraphs for progress
-		total = sum(1 for p in doc_text if p.strip())
-		if total == 0:
-			return
+	# 	# count non-empty paragraphs for progress
+	# 	total = sum(1 for p in doc_text if p.strip())
+	# 	if total == 0:
+	# 		return
 
-		progress_bar.visible = True
-		progress_percent.visible = True
-		progress_bar.value = 0.0
-		progress_percent.value = "0%"
-		page.update()
+	# 	progress_bar.visible = True
+	# 	progress_percent.visible = True
+	# 	progress_bar.value = 0.0
+	# 	progress_percent.value = "0%"
+	# 	page.update()
 
-		html_string_result = ""
-		processed = 0
+	# 	html_string_result = ""
+	# 	processed = 0
 
-		for para in doc_text:
-			if len(para.strip()) == 0:
-				continue
+	# 	for para in doc_text:
+	# 		if len(para.strip()) == 0:
+	# 			continue
 
-			# Convert query sentence to embedding and search
-			query_embedding = model.encode(para)
-			hits = semantic_search(query_embedding, sentence_embeddings, top_k=3)
-			matches = []
+	# 		# Convert query sentence to embedding and search
+	# 		query_embedding = model.encode(para)
+	# 		hits = semantic_search(query_embedding, sentence_embeddings, top_k=3)
+	# 		matches = []
 
-			if hits[0][0]['score'] > cutoff_value:
-				for hit in hits[0]:
-					if hit['score'] >= cutoff_value:
-						matches.append(f"{clause_phrases[hit['corpus_id']]}")
+	# 		if hits[0][0]['score'] > cutoff_value:
+	# 			for hit in hits[0]:
+	# 				if hit['score'] >= cutoff_value:
+	# 					matches.append(f"{clause_phrases[hit['corpus_id']]}")
 
-				if len(matches) > 0:
-					html_string_result += output_results_as_html_string(para, matches)
-			else:
-				sentences = para.split('. ')
-				for sentence in sentences:
-					if len(sentence.strip()) == 0:
-						continue
+	# 			if len(matches) > 0:
+	# 				html_string_result += output_results_as_html_string(para, matches)
+	# 		else:
+	# 			sentences = para.split('. ')
+	# 			for sentence in sentences:
+	# 				if len(sentence.strip()) == 0:
+	# 					continue
 
-					query_embedding = model.encode(sentence)
-					hits = semantic_search(query_embedding, sentence_embeddings, top_k=3)
-					matches = []
+	# 				query_embedding = model.encode(sentence)
+	# 				hits = semantic_search(query_embedding, sentence_embeddings, top_k=3)
+	# 				matches = []
 
-					if hits[0][0]['score'] > secondary_cutoff_value:
-						for hit in hits[0]:
-							if hit['score'] >= secondary_cutoff_value:
-								matches.append(f"{clause_phrases[hit['corpus_id']]}")
+	# 				if hits[0][0]['score'] > secondary_cutoff_value:
+	# 					for hit in hits[0]:
+	# 						if hit['score'] >= secondary_cutoff_value:
+	# 							matches.append(f"{clause_phrases[hit['corpus_id']]}")
 
-						if len(matches) > 0:
-							html_string_result += output_results_as_html_string(sentence, matches)
-					else:
-						html_string_result += output_notmatch_as_html_string(sentence, matches)
+	# 					if len(matches) > 0:
+	# 						html_string_result += output_results_as_html_string(sentence, matches)
+	# 				else:
+	# 					html_string_result += output_notmatch_as_html_string(sentence, matches)
 
-			processed += 1
-			progress_bar.value = processed / total
-			progress_percent.value = f"{int(progress_bar.value * 100)}%"
-			page.update()
-			await asyncio.sleep(0)
+	# 		processed += 1
+	# 		progress_bar.value = processed / total
+	# 		progress_percent.value = f"{int(progress_bar.value * 100)}%"
+	# 		page.update()
+	# 		await asyncio.sleep(0)
 		
-		# I asked vscode ai to add the progress bar to the function and it just replaced the code for the process contract function and added it here.
-		html_output = f"""<!DOCTYPE html>
-		<html lang="en">
-		<head>
-			<meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<meta name="description" content="">
-			<title>Contract Reference Tool</title>
-			<style>
-				{style}
-			</style>
-		</head>
-		<body>
-			<h1>Contract Reference Tool</h1>
-			<p>{button}</p>
-			<main>
-				<div>
-					{html_string_result}
-				</div>
-			</main>
-			<p>{button}</p>
-			<footer>
-				<p>Powered by the <a href="https://www.contractcodex.com/">Contract Codex Community</a>.</p>
-			</footer>
-			<script>
-				{script}
-			</script>
-		</body>
-		</html>
+	# 	# I asked vscode ai to add the progress bar to the function and it just replaced the code for the process contract function and added it here.
+	# 	html_output = f"""<!DOCTYPE html>
+	# 	<html lang="en">
+	# 	<head>
+	# 		<meta charset="UTF-8">
+	# 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	# 		<meta name="description" content="">
+	# 		<title>Contract Reference Tool</title>
+	# 		<style>
+	# 			{style}
+	# 		</style>
+	# 	</head>
+	# 	<body>
+	# 		<h1>Contract Reference Tool</h1>
+	# 		<p>{button}</p>
+	# 		<main>
+	# 			<div>
+	# 				{html_string_result}
+	# 			</div>
+	# 		</main>
+	# 		<p>{button}</p>
+	# 		<footer>
+	# 			<p>Powered by the <a href="https://www.contractcodex.com/">Contract Codex Community</a>.</p>
+	# 		</footer>
+	# 		<script>
+	# 			{script}
+	# 		</script>
+	# 	</body>
+	# 	</html>
 
-		"""
-		with open(f'{files[0].path}.html', 'w') as f:
-			f.write(html_output)
-		# with open(f'src/assets/Reports/{files[0].name}.html', 'w') as f:
-		# 	f.write(html_output)
+	# 	"""
+	# 	with open(f'{files[0].path}.html', 'w') as f:
+	# 		f.write(html_output)
+	# 	# with open(f'src/assets/Reports/{files[0].name}.html', 'w') as f:
+	# 	# 	f.write(html_output)
 
-		progress_bar.visible = False
-		progress_percent.visible = False
-		page.update()
+	# 	progress_bar.visible = False
+	# 	progress_percent.visible = False
+	# 	page.update()
 
 
-	page.add(
-		ft.Column(
-			controls=[
-				ft.Text("Contract Reference Tool"),
-				ft.Text("Powered by Contract Codex"),
-				ft.Row(
-					controls=[
-						ft.Button(
-							content="Pick Contract File",
-							icon=ft.Icons.UPLOAD_FILE,
-							on_click=handle_pick_files,
-						),
-					]
-				),
-				ft.Row(controls=[progress_bar, progress_percent]),
-			]
-		)
-	)
+	# page.add(
+	# 	ft.Column(
+	# 		controls=[
+	# 			ft.Text("Contract Reference Tool"),
+	# 			ft.Text("Powered by Contract Codex"),
+	# 			ft.Row(
+	# 				controls=[
+	# 					ft.Button(
+	# 						content="Pick Contract File",
+	# 						icon=ft.Icons.UPLOAD_FILE,
+	# 						on_click=handle_pick_files,
+	# 					),
+	# 				]
+	# 			),
+	# 			ft.Row(controls=[progress_bar, progress_percent]),
+	# 		]
+	# 	)
+	# )
 ft.run(main, assets_dir="assets")
 
 # if __name__ == "__main__":
